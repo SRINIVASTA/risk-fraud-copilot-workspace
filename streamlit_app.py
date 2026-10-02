@@ -292,11 +292,16 @@ if "💬 Conversational CoCo Copilot" in tab_map:
                             aid = str(matched["ACCOUNT_ID"])
                             full_record_sql = f"SELECT * FROM RISK_COPILOT_DB.COMPLIANCE_CORE.ACCOUNT_MASTER WHERE ACCOUNT_ID = '{aid}'"
                             full_df = session.sql(full_record_sql).to_pandas()
+                            full_df.columns = full_df.columns.str.strip().str.upper() # Keep column casing safe
+                            
                             if not full_df.empty:
-                                record = full_df.iloc
+                                # FIXED: Explicitly pull the row as a Series index record to fix .iloc get attribute crash
+                                record = full_df.iloc[0] 
                                 detail_lines = [f"FULL ACCOUNT MASTER RECORD FOR {aid}:"]
                                 for col_name in full_df.columns:
                                     detail_lines.append(f" {col_name}: {record[col_name]}")
+                                
+                                # FIXED: Standardized safe key access out of the series block
                                 lock = str(matched.get("LIVE_LOCK_STATUS", "UNLOCKED")).strip()
                                 detail_lines.append(f" REMEDIATION_LOCK_STATUS: {lock}")
                                 account_detail_block = "\n".join(detail_lines)
@@ -315,8 +320,13 @@ if "💬 Conversational CoCo Copilot" in tab_map:
                         User Question: {user_prompt}
                         Answer:"""
                         clean = chat_prompt.replace("'", "''").replace("{", "[").replace("}", "]")
-                        res = session.sql(f"SELECT SNOWFLAKE.CORTEX.COMPLETE('llama3.1-70b', CONCAT('{clean}')) as output;").collect()
-                        ai_output = str(res["OUTPUT"]) if res else "No response from Cortex."
+                        
+                        # Execute context call directly to Cortex Complete API
+                        res_df = session.sql(f"SELECT SNOWFLAKE.CORTEX.COMPLETE('llama3.1-70b', '{clean}') as output;").to_pandas()
+                        if not res_df.empty:
+                            ai_output = str(res_df.iloc[0]["OUTPUT"])
+                        else:
+                            ai_output = "No response from Cortex."
                 except Exception as e:
                     ai_output = f"Error: {str(e)}"
                     
