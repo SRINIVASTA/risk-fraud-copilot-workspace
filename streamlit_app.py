@@ -18,6 +18,31 @@ except Exception as e:
     st.error(f"❌ Connection Error: Run directly inside your Snowflake Streamlit Workspace. Details: {e}")
     st.stop()
 
+# --- MASTER ACCESS SECURITY GATE ---
+if "developer_authenticated" not in st.session_state:
+    st.session_state["developer_authenticated"] = False
+
+if not st.session_state["developer_authenticated"]:
+    st.markdown("---")
+    # Using st.columns(3) to prevent the blank parameter TypeError
+    _gate_spacer1, gate_center, _gate_spacer2 = st.columns(3)
+    with gate_center:
+        st.markdown("## 🛡️ Secure Compliance Sandbox")
+        st.caption("Authorized evaluation access only. Please enter the master key to unlock the prototype console.")
+        
+        entered_key = st.text_input("Evaluation Access Key", type="password", placeholder="Enter key...")
+        st.markdown("")
+        
+        if st.button("Unlock Sandbox Panel", type="primary", use_container_width=True):
+            master_key = os.getenv("JUDGE_ACCESS_KEY", "NOT_CONFIGURED_IN_SECRETS")
+            if entered_key == master_key:
+                st.session_state["developer_authenticated"] = True
+                st.success("🔓 Environment Unlocked!")
+                st.rerun()
+            else:
+                st.error("🔒 Invalid Access Key. Access Denied.")
+    st.stop()  # Explicitly halts execution until the gate is unlocked
+
 # AUTHENTICATION GATE
 CLEARANCE_PERMISSIONS = {
     "L1_BASIC": {
