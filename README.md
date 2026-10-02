@@ -1,4 +1,4 @@
-# 🛡️ Risk & Fraud Copilot Workspace | Team SnowShield
+# 🛡️ Risk & Fraud Copilot Workspace | Team:SnowShield
 
 An AI-native procurement fraud and velocity detection platform built 100% inside the **Snowflake Data Cloud** using a zero-data-movement architecture. Developed natively via **Snowlit**, this solution completely eliminates data exfiltration and leakage vectors by keeping all data parsing, regulatory vector matching, and LLM text generation entirely within your secure database perimeter.
 
@@ -78,6 +78,9 @@ graph TD
     Tab4 -->|Deploy Hardcoded Rules| RuleEng
     RuleEng <-->|Scan Signals & Compute Overrides| T4
     RuleEng <-->|Cross Reference Country Codes| T6
+
+    %% IAM Security Administration Flow
+    Tab5 -->|Create Users & Toggle Activity Status| T1
 
     %% Apply Styles
     class SF,Core,T1,V1,T2,T3,T4,T5,T6,T7 snowflake;
