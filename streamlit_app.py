@@ -136,7 +136,12 @@ user_rank = clearance_rank.get(user_clearance, 0)
 visible_tabs = [label for label, min_cl in all_tab_defs if clearance_rank.get(min_cl, 99) <= user_rank]
 
 if user_clearance == "L4_FULL_ACCESS":
-    visible_tabs = [t for t in all_tab_defs] # Grant all tabs for L4
+    # Fixed: Extract only the string title index t[0] from the tuple list
+    visible_tabs = [t[0] for t in all_tab_defs] 
+
+# Fail-safe guardrail: Ensure the list is never completely empty
+if not visible_tabs:
+    visible_tabs = ["📊 Operational Dashboard"]
 
 tabs = st.tabs(visible_tabs)
 tab_map = {label: t for label, t in zip(visible_tabs, tabs)}
