@@ -67,7 +67,9 @@ if "iam_user" not in st.session_state:
         if login_user:
             match = all_users_df[all_users_df["USERNAME"] == login_user]
             if not match.empty:
-                st.success(f"🔓 Welcome, **{match.iloc['DISPLAY_NAME']}** ({match.iloc['ACCESS_ROLE']})")
+                # Using .iloc[0] safely extracts the first matched user row
+                user_row = match.iloc[0]
+                st.success(f"🔓 Welcome, **{user_row['DISPLAY_NAME']}** ({user_row['ACCESS_ROLE']})")
                 st.text_input("Password", value="........", type="password", key="iam_password", disabled=True)
         else:
             st.text_input("Password", value="", type="password", key="iam_password", disabled=True, placeholder="Select a user above")
@@ -83,7 +85,8 @@ if "iam_user" not in st.session_state:
                 try:
                     auth_result = session.sql(auth_sql).to_pandas()
                     if not auth_result.empty:
-                        user = auth_result.iloc.to_dict()
+                        user = auth_result.iloc[0].to_dict()
+
                         st.session_state["iam_user"] = user
                         session.sql(f"UPDATE RISK_COPILOT_DB.COMPLIANCE_CORE.IDENTITY_ACCESS_MASTER SET LAST_LOGIN = CURRENT_TIMESTAMP() WHERE USERNAME = '{login_user}'").collect()
                         st.rerun()
