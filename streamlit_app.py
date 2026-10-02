@@ -351,13 +351,19 @@ if "🔍 Account Directory Lookup" in tab_map:
         if selected_acc:
             try:
                 acc_row = master_accounts_df[master_accounts_df["ACCOUNT_ID"] == selected_acc]
-                acc = acc_row.iloc if not acc_row.empty else pd.Series()
+                
+                # FIXED: Added [0] to correctly extract the row as a Series object
+                acc = acc_row.iloc[0] if not acc_row.empty else pd.Series(dtype=object)
                 
                 rem_sql = f"SELECT SYSTEMIC_LOCK_STATUS, KYC_STEP_UP_LEVEL, OUTBOUND_OVERRIDE_ENABLED, UPDATED_AT, UPDATED_BY FROM REMEDIATION_LOG WHERE ACCOUNT_ID = '{selected_acc}' ORDER BY UPDATED_AT DESC LIMIT 1"
                 rem_df = session.sql(rem_sql).to_pandas()
+                rem_df.columns = rem_df.columns.str.strip().str.upper() # Keep column headers matching uppercase
+                
                 if not rem_df.empty:
-                    lock_status = str(rem_df.iloc.get("SYSTEMIC_LOCK_STATUS", "UNLOCKED"))
-                    kyc_step = str(rem_df.iloc.get("KYC_STEP_UP_LEVEL", "STANDARD"))
+                    # FIXED: Extracted the first row as a Series via .iloc[0] to support .get()
+                    rem_row = rem_df.iloc[0]
+                    lock_status = str(rem_row.get("SYSTEMIC_LOCK_STATUS", "UNLOCKED"))
+                    kyc_step = str(rem_row.get("KYC_STEP_UP_LEVEL", "STANDARD"))
                 else:
                     lock_status, kyc_step = "UNLOCKED", "STANDARD"
                     
