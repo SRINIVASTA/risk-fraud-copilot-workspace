@@ -12,6 +12,7 @@ An AI-native procurement fraud and velocity detection platform built 100% inside
 * **💬 Tab 3: Conversational CoCo:** RAG engine using `VECTOR_COSINE_SIMILARITY` and `llama3.1-70b` for instant markdown STR reports.
 * **🔍 Tab 4 & 🔐 5: Admin Desk:** Account lookup and real-time status overrides.
 
+```mermaid
 graph TD
     %% Base Styling
     classDef snowflake fill:#1d94d2,stroke:#0f4c6c,stroke-width:2px,color:#fff;
@@ -65,3 +66,4 @@ graph TD
     class Tab1 security;
     class UI,Tab2,Tab3,Tab4 app;
     class Analytics,Vector,LLM data;
+```
