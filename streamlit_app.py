@@ -48,7 +48,8 @@ CLEARANCE_PERMISSIONS = {
 
 if "iam_user" not in st.session_state:
     st.markdown("---")
-    _login_spacer1, login_center, _login_spacer2 = st.columns()
+# Change this on line 51:
+    _login_spacer1, login_center, _login_spacer2 = st.columns([1, 2, 1])
     with login_center:
         st.markdown("## Procurement Fraud Detection System")
         st.markdown("#### Identity & Access Authentication Required")
