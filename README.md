@@ -93,6 +93,14 @@ graph TD
 
 ## 👥 Role Matrix & Access Hierarchy
 
+## 🔓 Passwordless Single Sign-On (SSO) Simulation Guide
+For quick judging evaluation, the system features a passwordless, biometric-style IAM mapping lookup. 
+
+**Instructions for Judges:**
+1. Simply select any **Username** from the select box dropdown menu.
+2. The system will automatically fetch that user's identity matrix. Leave the masked password as-is.
+3. Click the primary **🔓 Authenticate & Enter System ** button to enter the workspace!
+
 The application maps specific interfaces dynamically based on the verified `CLEARANCE_LEVEL` row entry assigned to the user inside `IDENTITY_ACCESS_MASTER`:
 
 | Role | Clearance Level | Permitted Views & Actions | System Restrictions |
@@ -101,7 +109,6 @@ The application maps specific interfaces dynamically based on the verified `CLEA
 | **COMPLIANCE_OFFICER** | `L2_ELEVATED` | Operational Dashboard + Conversational CoCo room chat + Customer 360 lookup. | Blocked from executing manual remediations, auto-rules, or IAM adjustments. |
 | **PRINCIPAL_PCO** | `L3_RESTRICTED` | All functional views + Execute manual containment protocols + Deploy automated rules. | Restricted from adding/managing system users or altering system clearancies. |
 | **SYSTEM_ADMIN** | `L4_FULL_ACCESS` | Complete system access. Manage IAM table, append records, toggle user activity statuses. | *None — Unrestricted Account Administrator Access*. |
-
 ---
 
 ## ⚙️ Core Workspace Modules
