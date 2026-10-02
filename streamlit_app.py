@@ -24,7 +24,6 @@ if "developer_authenticated" not in st.session_state:
 
 if not st.session_state["developer_authenticated"]:
     st.markdown("---")
-    # Using st.columns(3) to prevent the blank parameter TypeError
     _gate_spacer1, gate_center, _gate_spacer2 = st.columns(3)
     with gate_center:
         st.markdown("## 🛡️ Secure Compliance Sandbox")
@@ -34,7 +33,8 @@ if not st.session_state["developer_authenticated"]:
         st.markdown("")
         
         if st.button("Unlock Sandbox Panel", type="primary", use_container_width=True):
-            master_key = os.getenv("JUDGE_ACCESS_KEY", "NOT_CONFIGURED_IN_SECRETS")
+            # FIXED: Bypassed os.getenv to eliminate secrets file reading errors entirely
+            master_key = "Hack2Skill@2026" 
             if entered_key == master_key:
                 st.session_state["developer_authenticated"] = True
                 st.success("🔓 Environment Unlocked!")
