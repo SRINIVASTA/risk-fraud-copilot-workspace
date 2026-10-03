@@ -8,7 +8,7 @@ An AI-native procurement fraud and velocity detection platform built 100% inside
   * *Note: Built natively inside the Snowflake Data Cloud to securely leverage high-performance analytical views and Snowflake Cortex AI within the data perimeter.*
 * **☁️ Environment 2 (External Public Staging): GitHub Streamlit App Listing:** [https://streamlit.app](https://risk-fraud-copilot-workspace-a2men2zzdwtthsxpngho9h.streamlit.app/)
   * *Note: Deployed to Streamlit Community Cloud for public web evaluation using encrypted key-pair backend routing.
-* **📋 Presentation Slide:** [Kept secure inside the workspace behind the Judge Access Key for Environment 2] 
+* **📋 Presentation Slide:** [Uploaded directly as a PDF to the Hack2Skill portal. Environment 2 workspace features are unlocked securely via the injected `JUDGE_ACCESS_KEY`in Slide 1]
  
 
 ---
