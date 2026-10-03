@@ -3,7 +3,7 @@
 An AI-native procurement fraud and velocity detection platform built 100% inside the **Snowflake Data Cloud** using a zero-data-movement architecture. Developed natively via **Snowlit**, this solution completely eliminates data exfiltration and leakage vectors by keeping all data parsing, regulatory vector matching, and LLM text generation entirely within your secure database perimeter.
 
 ## 🚀 Live Submission Links
-* **🎬 Walkthrough Video:** [https://youtu.be/W2x3D_auWRg]
+* **🎬 Walkthrough Video:** [https://youtu.be](https://youtu.be/W2x3D_auWRg)
 * **❄️ Environment 1 (Primary Production): Native App Listing:** [https://snowflake.com](https://app.snowflake.com/streamlit/wiqkuow/ck78610/#/apps/USER$TASRINIVASS.PUBLIC.STF4F5A9D9F5C3406E6D0A5ABA7BE3B33A17885098)
   * *Note: Built natively inside the Snowflake Data Cloud to securely leverage high-performance analytical views and Snowflake Cortex AI within the data perimeter.*
 * **☁️ Environment 2 (External Public Staging): GitHub Streamlit App Listing:** [https://streamlit.app](https://risk-fraud-copilot-workspace-a2men2zzdwtthsxpngho9h.streamlit.app/)
