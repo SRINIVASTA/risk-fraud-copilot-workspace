@@ -1,5 +1,5 @@
 # 🛡️ Risk & Fraud Copilot Workspace | Team:SnowShield
-### 🏆 Official Submission for the Snowflake CoCo CLI Hackathon 2026 (Hosted by Hack2Skill)
+### 🏆 Official Submission for the Snowflake CoCo Hackathon (Hosted by Hack2Skill)
 **Problem Statement Area:** Risk, Fraud, and Regulatory Intelligence Copilot
 
 An AI-native procurement fraud and velocity detection platform built 100% inside the **Snowflake Data Cloud** using a zero-data-movement architecture. Developed natively via **Snowlit**, this solution completely eliminates data exfiltration and leakage vectors by keeping all data parsing, regulatory vector matching, and LLM text generation entirely within your secure database perimeter.
